@@ -1,9 +1,40 @@
+*{margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
   width: 100%;
   min-height: 100vh;
-  background:url("resources/background_pokemon.jpg");
+  background-image: url("./resources/pokemon_background.png");
+  background-size:cover;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-attachment: fixed;
+  background-position: bottom;	
 }
 
+.pokemon-logo{
+	width: 15%;
+	height: auto;
+}
+
+.pokemon-list{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+}
+
+.pokemon-card{
+	background-color: lightgray;
+	border-radius: 10px;
+	width: fit-content;
+}
+
+.types {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
