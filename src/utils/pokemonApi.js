@@ -11,12 +11,16 @@ export async function  getAllPokemons(){
         return data
     })
     const pokemonData = await Promise.all(promiseArray)
-    console.log(pokemonData)
     return {...data, results: pokemonData}
 }
 
 export async function getPokemons(limit=10, page){
     const {data} = await pokemonApi.get(`/pokemon?limit=${limit}&offset=${page*limit}`)
+    return data
+}
+
+export async function getPokemonById(id){
+    const {data} = await pokemonApi.get(`/pokemon/${id}`)
     return data
 }
 
