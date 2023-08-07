@@ -1,6 +1,13 @@
+import { useNavigate } from "react-router-dom"
 import "../styles/PokemonCard.css"
 export default function PokemonCard({pokemon}){
-    return <article className="pokemon-card">
+    const navigate = useNavigate()
+
+    function handleClick(){
+        navigate(`/pokemon/${pokemon.id}`)
+    }
+
+    return <article className="pokemon-card" onClick={handleClick}>
         <img src={pokemon.sprites.front_default} alt={pokemon.name} />
         <div className="pokemon-desc">
             <span className="pokemon-id">#{pokemon.id}</span>
