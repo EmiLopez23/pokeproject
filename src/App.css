@@ -22,59 +22,52 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-body{
+body {
 	font-family: 'Quicksand', sans-serif;
 }
 
 
 
 .App {
-  width: 100%;
-  min-height: 100vh;
-  background-image: url("./resources/pokemon_background.png");
-  background-size:cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: bottom;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	min-height: 100vh;
+	background-image: url("./resources/pokemon_background.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: bottom;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
 }
 
-header{
+header {
 	text-align: center;
 }
 
-.pokemon-logo{
+.pokemon-logo {
 	width: 15%;
 	min-width: 200px;
 	height: auto;
 }
 
-main{
+main {
 	max-width: 1200px;
 }
 
-input,select{
-	padding: 10px;
-	border-radius: 5px;
-	border: none;
-	font-size: 1rem;
-}
-
-.filters{
+.filters {
 	display: flex;
-	gap: 10px;
 	flex-wrap: wrap;
+	align-items: center;
 	margin-bottom: 10px;
 }
 
-.pokemon-list{
+.pokemon-list {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
