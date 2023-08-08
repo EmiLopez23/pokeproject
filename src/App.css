@@ -54,6 +54,7 @@ header {
 	width: 15%;
 	min-width: 200px;
 	height: auto;
+	cursor: pointer;
 }
 
 main {
