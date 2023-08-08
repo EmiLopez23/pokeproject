@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
 import Filters from "../components/Filters";
 import PokemonList from "../components/PokemonList";
-import { getAllPokemons } from "../utils/pokemonApi";
+import usePokemons from "../hooks/usePokemons"
 
 export default function HomePage(){
-    const [pokemons, setPokemons] = useState([])
-    useEffect(()=>{
-      getAllPokemons().then((data) => setPokemons(data))
-    },[])
+  const {pokemons,filterPokemons} = usePokemons()
+
     return <main>
-        <Filters/>
+        <Filters filterPokemons={filterPokemons}/>
         <PokemonList pokemons={pokemons}/>
       </main>
 }

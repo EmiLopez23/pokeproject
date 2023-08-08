@@ -5,7 +5,7 @@ const pokemonApi = axios.create({
 })
 
 export async function  getAllPokemons(){
-    const {data} = await pokemonApi.get("/pokemon?limit=10")
+    const {data} = await pokemonApi.get("/pokemon?limit=10000")
     const promiseArray = data.results.map(async (pokemon) => {
         const {data} = await axios.get(pokemon.url)
         return data
@@ -14,9 +14,14 @@ export async function  getAllPokemons(){
     return {...data, results: pokemonData}
 }
 
-export async function getPokemons(limit=10, page){
+export async function getPokemons(limit=10, page=0){
     const {data} = await pokemonApi.get(`/pokemon?limit=${limit}&offset=${page*limit}`)
-    return data
+    const promiseArray = data.results.map(async (pokemon) => {
+        const {data} = await axios.get(pokemon.url)
+        return data
+    })
+    const pokemonData = await Promise.all(promiseArray)
+    return {...data, results: pokemonData}
 }
 
 export async function getPokemonById(id){

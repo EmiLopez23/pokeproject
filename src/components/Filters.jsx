@@ -3,11 +3,12 @@ import { getTypes } from "../utils/pokemonApi"
 import { FormControl, MenuItem, OutlinedInput, Select } from "@mui/material"
 
 
-export default function Filters() {
+export default function Filters({filterPokemons}) {
     const [types, setTypes] = useState([])
     const [filters, setFilters] = useState({ name: "", type: "" });
 
     function handleTypeChange(event) {
+        filterPokemons(event.target.value)
         setFilters(prevState => ({ ...prevState, type: event.target.value }));
     };
 
@@ -18,6 +19,7 @@ export default function Filters() {
     useEffect(() => {
         getTypes().then((types) => setTypes(types))
     }, [])
+
 
     return <section className="filters">
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
