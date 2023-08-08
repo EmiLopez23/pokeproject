@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getPokemonByIdWithEvolves } from "../utils/pokemonApi";
 import { Box, LinearProgress } from "@mui/material";
 import { linearProgressClasses } from "@mui/material/LinearProgress";
@@ -8,6 +8,7 @@ import "../styles/PokemonPage.css"
 export default function PokemonPage() {
     const { id } = useParams()
     const [pokemon, setPokemon] = useState(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         getPokemonByIdWithEvolves(id).then((data) => { setPokemon(data); console.log(data) })
@@ -32,8 +33,11 @@ export default function PokemonPage() {
                 <Box sx={{ flexGrow: 1 }}>
                     <h3>Base Stats</h3>
                     {pokemon.stats.map((stat, index) => <section key={index} className="stat">
-                        <p>{stat.stat.name}</p>
-                        <LinearProgress variant="determinate" value={stat.base_stat} sx={{
+                        <div style={{display:'flex',alignItems:'center',justifyContent:"space-between"}}>
+                            <p>{stat.stat.name}</p>
+                            <p>{stat.base_stat}</p>
+                        </div>
+                        <LinearProgress variant="determinate" value={stat.base_stat > 100 ? 100 : stat.base_stat} sx={{
                             height: 25,
                             borderRadius: 1,
                             [`&.${linearProgressClasses.colorPrimary}`]: { backgroundColor: "rgb(114, 114, 114)" },
@@ -45,7 +49,7 @@ export default function PokemonPage() {
             <section className="evolutions">
                 <h2>Evolutions</h2>
                 <div className="evolution-chain">
-                    {pokemon.evolutions.map((evolve, index) => <div key={index} className="evolution">
+                    {pokemon.evolutions.map((evolve, index) => <div key={index} className="evolution" onClick={()=>navigate(`/${evolve.id}`)}>
                         <img src={evolve.sprites?.other.dream_world.front_default} alt={evolve.name} />
                         <h4>{evolve.name}</h4>
                     </div>)}

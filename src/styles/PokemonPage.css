@@ -29,6 +29,11 @@ main{
 
 }
 
+.left-side > img{
+    width: 220px;
+    height: auto;
+}
+
 .left-side > h1{
     font-size: xx-large;
 }
@@ -62,6 +67,10 @@ main{
     align-items: baseline;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+.evolution{
+    cursor: pointer;
 }
 
 .evolution > h4{
