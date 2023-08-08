@@ -5,7 +5,7 @@ const pokemonApi = axios.create({
 })
 
 export async function  getAllPokemons(){
-    const {data} = await pokemonApi.get("/pokemon?limit=10000")
+    const {data} = await pokemonApi.get("/pokemon?limit=500")
     const promiseArray = data.results.map(async (pokemon) => {
         const {data} = await axios.get(pokemon.url)
         return data
@@ -31,7 +31,7 @@ export async function getPokemonById(id){
 
 export async function getPokemonByIdWithEvolves(id){
     const data = await getPokemonById(id)
-    const {data: species} = await pokemonApi.get(`/pokemon-species/${id}`)
+    const {data: species} = await pokemonApi.get(data.species.url.split("v2")[1])
     const evolutionId = species.evolution_chain.url.split("/evolution-chain/")[1]
     const evolutions = await getEvolves(evolutionId)
     return {...data, evolutions}

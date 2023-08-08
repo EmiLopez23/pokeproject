@@ -3,22 +3,27 @@ import { getTypes } from "../utils/pokemonApi"
 import { FormControl, MenuItem, OutlinedInput, Select } from "@mui/material"
 
 
-export default function Filters({filterPokemons}) {
+export default function Filters({filter}) {
     const [types, setTypes] = useState([])
     const [filters, setFilters] = useState({ name: "", type: "" });
 
     function handleTypeChange(event) {
-        filterPokemons(event.target.value)
+     //   filterPokemons(event.target.value)
         setFilters(prevState => ({ ...prevState, type: event.target.value }));
     };
 
     function handleNameChange(event) {
+     //   searchPokemons(event.target.value)
         setFilters(prevState => ({ ...prevState, name: event.target.value }));
     }
 
     useEffect(() => {
         getTypes().then((types) => setTypes(types))
     }, [])
+
+    useEffect(()=>{
+        filter(filters)
+    },[filters])
 
 
     return <section className="filters">

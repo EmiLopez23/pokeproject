@@ -3,10 +3,10 @@ import PokemonList from "../components/PokemonList";
 import usePokemons from "../hooks/usePokemons"
 
 export default function HomePage(){
-  const {pokemons,filterPokemons} = usePokemons()
+  const {pokemons,filter} = usePokemons()
 
     return <main>
-        <Filters filterPokemons={filterPokemons}/>
+        <Filters filter={filter}/>
         <PokemonList pokemons={pokemons}/>
       </main>
 }

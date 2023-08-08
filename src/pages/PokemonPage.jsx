@@ -11,7 +11,9 @@ export default function PokemonPage() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getPokemonByIdWithEvolves(id).then((data) => { setPokemon(data); console.log(data) })
+        getPokemonByIdWithEvolves(id)
+        .then((data) => { setPokemon(data) })
+        .catch(err=>console.log(err))
     }, [id])
 
 
@@ -19,7 +21,7 @@ export default function PokemonPage() {
         <main>
             <section className="pokemon">
                 <div className="left-side">
-                    <img src={pokemon.sprites.other.dream_world.front_default} alt={pokemon.name} />
+                    <img src={pokemon.sprites.front_default} alt={pokemon.name} />
                     <h1>{pokemon.name}</h1>
                     <div className="types">
                         {pokemon.types.map(({ type }, index) => <span key={index} className={`type-tag ${type.name}`}>{type.name} </span>)}
@@ -49,8 +51,8 @@ export default function PokemonPage() {
             <section className="evolutions">
                 <h2>Evolutions</h2>
                 <div className="evolution-chain">
-                    {pokemon.evolutions.map((evolve, index) => <div key={index} className="evolution" onClick={()=>navigate(`/${evolve.id}`)}>
-                        <img src={evolve.sprites?.other.dream_world.front_default} alt={evolve.name} />
+                    {pokemon.evolutions.map((evolve, index) => <div key={index} className="evolution" onClick={()=>navigate(`/pokemon/${evolve.id}`)}>
+                        <img src={evolve.sprites.front_default} alt={evolve.name} />
                         <h4>{evolve.name}</h4>
                     </div>)}
                 </div>
