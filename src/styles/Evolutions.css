@@ -1,0 +1,21 @@
+.evolution-chain{
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.evolution{
+    cursor: pointer;
+}
+
+.evolution > h4{
+    background-color: rgba(0,0,0,0.87);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.evolution > img{
+    width: 150px;
+    height: auto;
+}
