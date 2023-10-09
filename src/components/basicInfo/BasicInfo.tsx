@@ -1,25 +1,19 @@
+import { Pokemon } from 'types';
 import './BasicInfo.css';
 
-export default function BasicInfo({
-  pokemon,
-}: {
-  pokemon: {
-    sprites: { front_default: string };
-    name: string;
-    types: { type: { name: string } }[];
-    weight: number;
-    height: number;
-    base_experience: number;
-  };
-}) {
+interface BasicInfoProps {
+  pokemon: Omit<Pokemon, 'stats' | 'id'>;
+}
+
+const BasicInfo = ({ pokemon }: BasicInfoProps) => {
   return (
     <div className="basic-info">
-      <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+      <img src={pokemon.sprite} alt={pokemon.name} />
       <h1>{pokemon.name}</h1>
       <div className="types">
-        {pokemon.types.map(({ type }, index) => (
-          <span key={index} className={`type-tag ${type.name}`}>
-            {type.name}{' '}
+        {pokemon.types.map((type, index) => (
+          <span key={index} className={`type-tag ${type}`}>
+            {type}
           </span>
         ))}
       </div>
@@ -39,4 +33,6 @@ export default function BasicInfo({
       </div>
     </div>
   );
-}
+};
+
+export default BasicInfo;

@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { getPokemons } from '../utils/pokemonApi';
 
-const POKEMON_QTY = 50;
+const POKEMON_QTY = 10;
 
 export default function usePokemons() {
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemons, setPokemons] = useState([
+    { name: ' ', id: 0, sprite: ' ', types: [''] },
+  ]);
 
   useEffect(() => {
-    getPokemons(10, 0).then((data) => {
-      console.log(data);
+    getPokemons(POKEMON_QTY, 0).then((data) => {
+      setPokemons(data);
     });
   }, []);
 

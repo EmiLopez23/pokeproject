@@ -9,7 +9,7 @@ import HomePage from './pages/homePage/HomePage';
 import PokemonPage from './pages/pokemonPage/PokemonPage';
 import Wrapper from './components/wrapper/Wrapper';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Router>
@@ -23,6 +23,6 @@ function App() {
       </Router>
     </div>
   );
-}
+};
 
 export default App;

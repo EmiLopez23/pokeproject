@@ -1,15 +1,11 @@
+import { BasePokemon } from 'types';
 import PokemonCard from '../pokemonCard/PokemonCard';
 
-export default function PokemonList({
-  pokemons,
-}: {
-  pokemons: {
-    sprites: { front_default: string };
-    name: string;
-    id: number;
-    types: { type: { name: string } }[];
-  }[];
-}) {
+interface PokemonListProps {
+  pokemons: (BasePokemon & { types: string[] })[];
+}
+
+const PokemonList = ({ pokemons }: PokemonListProps) => {
   return (
     <section className="pokemon-list">
       {pokemons?.map((pokemon) => (
@@ -17,4 +13,6 @@ export default function PokemonList({
       ))}
     </section>
   );
-}
+};
+
+export default PokemonList;

@@ -1,15 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import './Evolutions.css';
+import { BasePokemon } from 'types';
 
-export default function Evolutions({
-  evolutions,
-}: {
-  evolutions: {
-    sprites: { front_default: string };
-    name: string;
-    id: number;
-  }[];
-}) {
+interface EvolutionsProps {
+  evolutions: BasePokemon[];
+}
+
+const Evolutions = ({ evolutions }: EvolutionsProps) => {
   const navigate = useNavigate();
 
   return (
@@ -20,10 +17,12 @@ export default function Evolutions({
           className="evolution"
           onClick={() => navigate(`/pokemon/${evolve.id}`)}
         >
-          <img src={evolve.sprites.front_default} alt={evolve.name} />
+          <img src={evolve.sprite} alt={evolve.name} />
           <h4>{evolve.name}</h4>
         </div>
       ))}
     </div>
   );
-}
+};
+
+export default Evolutions;

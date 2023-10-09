@@ -1,6 +1,7 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import logo from '../../resources/pokemon_logo.png';
-export default function Wrapper() {
+
+const Wrapper = () => {
   const navigate = useNavigate();
   return (
     <>
@@ -15,4 +16,6 @@ export default function Wrapper() {
       <Outlet />
     </>
   );
-}
+};
+
+export default Wrapper;

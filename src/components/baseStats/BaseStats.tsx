@@ -1,12 +1,13 @@
 import { Box, LinearProgress } from '@mui/material';
 import { linearProgressClasses } from '@mui/material/LinearProgress';
 import './BaseStats.css';
+import { Stat } from 'types';
 
-export default function BaseStats({
-  stats,
-}: {
-  stats: { stat: { name: string }; base_stat: number }[];
-}) {
+interface BaseStatsProps {
+  stats: Stat[];
+}
+
+const BaseStats = ({ stats }: BaseStatsProps) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <h3>Base Stats</h3>
@@ -19,12 +20,12 @@ export default function BaseStats({
               justifyContent: 'space-between',
             }}
           >
-            <p>{stat.stat.name}</p>
-            <p>{stat.base_stat}</p>
+            <p>{stat.name}</p>
+            <p>{stat.value}</p>
           </div>
           <LinearProgress
             variant="determinate"
-            value={stat.base_stat > 100 ? 100 : stat.base_stat}
+            value={stat.value > 100 ? 100 : stat.value}
             sx={{
               height: 25,
               borderRadius: 1,
@@ -41,4 +42,6 @@ export default function BaseStats({
       ))}
     </Box>
   );
-}
+};
+
+export default BaseStats;
