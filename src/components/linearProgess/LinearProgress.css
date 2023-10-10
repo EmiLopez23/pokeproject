@@ -1,0 +1,13 @@
+.linear-progress-container {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: rgb(114, 114, 114);
+}
+
+.linear-progress {
+  display: block;
+  height: 25px;
+  background-color: #1e7ad0;
+  transition: width 0.5s linear;
+}
