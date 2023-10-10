@@ -16,7 +16,14 @@ const PokemonPage = () => {
     height: 0,
     base_experience: 0,
     evolutions: [{ sprite: '', name: '', id: 0 }],
-    stats: [{ name: '', value: 0 }],
+    stats: [
+      { name: '', value: 0 },
+      { name: '', value: 0 },
+      { name: '', value: 0 },
+      { name: '', value: 0 },
+      { name: '', value: 0 },
+      { name: '', value: 0 },
+    ], //six objects, each for a single stat mainly for the animation
   });
 
   useEffect(() => {

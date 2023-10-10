@@ -9,9 +9,9 @@ interface PokemonCardProps {
 const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   const navigate = useNavigate();
 
-  function handleClick() {
+  const handleClick = () => {
     navigate(`/pokemon/${pokemon.id}`);
-  }
+  };
 
   return (
     <article className="pokemon-card" onClick={handleClick}>
