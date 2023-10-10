@@ -2,13 +2,16 @@ import { Pokemon } from 'types';
 import './BasicInfo.css';
 
 interface BasicInfoProps {
-  pokemon: Omit<Pokemon, 'stats' | 'id'>;
+  pokemon: Omit<Pokemon, 'stats'>;
 }
 
 const BasicInfo = ({ pokemon }: BasicInfoProps) => {
   return (
     <div className="basic-info">
-      <img src={pokemon.sprite} alt={pokemon.name} />
+      <img
+        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+        alt={pokemon.name}
+      />
       <h1>{pokemon.name}</h1>
       <div className="types">
         {pokemon.types.map((type, index) => (

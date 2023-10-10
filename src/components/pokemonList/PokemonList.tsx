@@ -1,5 +1,6 @@
 import { BasePokemon } from 'types';
 import PokemonCard from '../pokemonCard/PokemonCard';
+import './PokemonList.css';
 
 interface PokemonListProps {
   pokemons: (BasePokemon & { types: string[] })[];

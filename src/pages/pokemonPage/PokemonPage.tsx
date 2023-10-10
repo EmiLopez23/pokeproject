@@ -33,8 +33,11 @@ const PokemonPage = () => {
   return (
     pokemon && (
       <main>
-        <section className="pokemon">
-          <BasicInfo pokemon={pokemon} />
+        <section
+          className="pokemon"
+          style={{ viewTransitionName: `pokemon-card-${id}` }}
+        >
+          <BasicInfo pokemon={{ ...pokemon, id: Number(id) }} />
           <BaseStats stats={pokemon.stats} />
         </section>
         <section className="evolutions">
