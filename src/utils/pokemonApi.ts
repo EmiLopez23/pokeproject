@@ -135,4 +135,18 @@ const getPokemonById = async (pokemonId: number): Promise<Pokemon> => {
   };
 };
 
-export { getPokemons, getPokemonById };
+const getTypes = async (): Promise<string[]> => {
+  const { data } = await client.query({
+    query: gql`
+      query getTypes {
+        pokemon_v2_type(order_by: { name: asc }) {
+          name
+        }
+      }
+    `,
+  });
+
+  return data.pokemon_v2_type.map((type: { name: string }) => type.name);
+};
+
+export { getPokemons, getPokemonById, getTypes };
