@@ -1,6 +1,6 @@
 import { BasePokemon } from 'types';
-import PokemonCard from '../pokemonCard/PokemonCard';
-import './PokemonList.css';
+import PokemonCard from '../pokemon_card/PokemonCard';
+import './PokemonList.styles.css';
 
 interface PokemonListProps {
   pokemons: (BasePokemon & { types: string[] })[];
@@ -9,7 +9,7 @@ interface PokemonListProps {
 const PokemonList = ({ pokemons }: PokemonListProps) => {
   return (
     <section className="pokemon-list">
-      {pokemons?.map((pokemon) => (
+      {pokemons.map((pokemon) => (
         <PokemonCard pokemon={pokemon} key={pokemon.id} />
       ))}
     </section>

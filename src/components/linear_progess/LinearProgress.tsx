@@ -1,4 +1,4 @@
-import './LinearProgress.css';
+import './LinearProgress.styles.css';
 
 const LinearProgress = ({ value }: { value: number }) => {
   return (

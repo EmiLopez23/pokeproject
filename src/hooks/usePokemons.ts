@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { getPokemons } from '../utils/pokemonApi';
+import { BasePokemon } from 'types';
 
 const POKEMON_QTY = 10;
 
 const usePokemons = () => {
-  const [pokemons, setPokemons] = useState([
-    { name: ' ', id: 0, sprite: ' ', types: [''] },
-  ]);
+  const [pokemons, setPokemons] = useState<
+    (BasePokemon & { types: string[] })[]
+  >([]);
 
   useEffect(() => {
     getPokemons(POKEMON_QTY, 0).then((data) => {

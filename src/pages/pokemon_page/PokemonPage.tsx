@@ -1,21 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './PokemonPage.css';
-import BaseStats from '../../components/baseStats/BaseStats';
-import BasicInfo from '../../components/basicInfo/BasicInfo';
+import './PokemonPage.styles.css';
+import BaseStats from '../../components/base_stats/BaseStats';
+import BasicInfo from '../../components/basic_info/BasicInfo';
 import Evolutions from '../../components/evolutions/Evolutions';
 import { getPokemonById } from 'utils/pokemonApi';
+import { Pokemon } from 'types';
 
 const PokemonPage = () => {
   const { id } = useParams();
-  const [pokemon, setPokemon] = useState({
+  const [pokemon, setPokemon] = useState<Pokemon>({
+    id: 0,
     sprite: '',
     name: '',
-    types: [''],
+    types: [],
     weight: 0,
     height: 0,
     base_experience: 0,
-    evolutions: [{ sprite: '', name: '', id: 0 }],
+    evolutions: [],
     stats: [
       { name: '', value: 0 },
       { name: '', value: 0 },
@@ -31,21 +33,19 @@ const PokemonPage = () => {
   }, [id]);
 
   return (
-    pokemon && (
-      <main>
-        <section
-          className="pokemon"
-          style={{ viewTransitionName: `pokemon-card-${id}` }}
-        >
-          <BasicInfo pokemon={{ ...pokemon, id: Number(id) }} />
-          <BaseStats stats={pokemon.stats} />
-        </section>
-        <section className="evolutions">
-          <h2>Evolutions</h2>
-          <Evolutions evolutions={pokemon.evolutions} />
-        </section>
-      </main>
-    )
+    <main>
+      <section
+        className="pokemon"
+        style={{ viewTransitionName: `pokemon-card-${id}` }}
+      >
+        <BasicInfo pokemon={pokemon} />
+        <BaseStats stats={pokemon.stats} />
+      </section>
+      <section className="evolutions">
+        <h2>Evolutions</h2>
+        <Evolutions evolutions={pokemon.evolutions} />
+      </section>
+    </main>
   );
 };
 

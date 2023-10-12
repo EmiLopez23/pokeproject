@@ -1,6 +1,6 @@
-import './BaseStats.css';
+import './BaseStats.styles.css';
 import { Stat } from 'types';
-import LinearProgress from 'components/linearProgess/LinearProgress';
+import LinearProgress from 'components/linear_progess/LinearProgress';
 
 interface BaseStatsProps {
   stats: Stat[];

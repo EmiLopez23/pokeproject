@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import Filters from '../../components/filters/Filters';
-import PokemonList from '../../components/pokemonList/PokemonList';
+import PokemonList from '../../components/pokemon_list/PokemonList';
 import usePokemons from '../../hooks/usePokemons';
 import InfiniteScroll from 'react-infinite-scroller';
-import SkeletonCard from 'components/SkeletonCard/SkeletonCard';
+import SkeletonCard from 'components/skeleton_card/SkeletonCard';
+import Loader from 'components/loader/Loader';
 
 const HomePage = () => {
   const { pokemons, loadMore } = usePokemons();
@@ -18,11 +19,16 @@ const HomePage = () => {
   return (
     <main>
       <Filters filters={filters} setFilters={setFilters} />
-      {pokemons[0].name !== ' ' ? (
+      {pokemons.length ? (
         <InfiniteScroll
           pageStart={0}
           loadMore={loadMore}
           hasMore={pokemons.length <= 1280}
+          loader={
+            <div style={{ width: '100%', textAlign: 'center', marginTop: 10 }}>
+              <Loader size={50} color="black" />
+            </div>
+          }
         >
           <PokemonList pokemons={filteredPokemons} />
         </InfiniteScroll>

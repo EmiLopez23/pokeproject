@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import './Evolutions.css';
+import './Evolutions.styles.css';
 import { BasePokemon } from 'types';
+import SkeletonImg from 'components/skeleton_img/SkeletonImg';
 
 interface EvolutionsProps {
   evolutions: BasePokemon[];
@@ -8,6 +9,15 @@ interface EvolutionsProps {
 
 const Evolutions = ({ evolutions }: EvolutionsProps) => {
   const navigate = useNavigate();
+
+  if (!evolutions.length)
+    return (
+      <div className="evolution-chain">
+        <SkeletonImg width={150} height={200} />
+        <SkeletonImg width={150} height={200} />
+        <SkeletonImg width={150} height={200} />
+      </div>
+    );
 
   return (
     <div className="evolution-chain">

@@ -1,7 +1,7 @@
-import SkeletonTag from 'components/SkeletonTag/SkeletonTag';
+import SkeletonTag from 'components/skeleton_tag/SkeletonTag';
 import './SkeletonCard.styles.css';
-import SkeletonTitle from 'components/SkeletonTitle/SkeletonTitle';
-import SkeletonImg from 'components/SkeletonImg/SkeletonImg';
+import SkeletonTitle from 'components/skeleton_title/SkeletonTitle';
+import SkeletonImg from 'components/skeleton_img/SkeletonImg';
 const SkeletonCard = () => {
   return (
     <article className="skeleton-card">

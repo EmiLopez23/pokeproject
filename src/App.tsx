@@ -5,8 +5,8 @@ import {
   BrowserRouter as Router,
   Routes,
 } from 'react-router-dom';
-import HomePage from './pages/homePage/HomePage';
-import PokemonPage from './pages/pokemonPage/PokemonPage';
+import HomePage from './pages/home_page/HomePage';
+import PokemonPage from './pages/pokemon_page/PokemonPage';
 import Wrapper from './components/wrapper/Wrapper';
 
 const App = () => {

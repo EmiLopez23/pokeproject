@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import './PokemonCard.css';
+import './PokemonCard.styles.css';
 import { BasePokemon } from 'types';
 import { flushSync } from 'react-dom';
 
@@ -11,11 +11,15 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    document.startViewTransition(() => {
-      flushSync(() => {
-        navigate(`/pokemon/${pokemon.id}`);
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        flushSync(() => {
+          navigate(`/pokemon/${pokemon.id}`);
+        });
       });
-    });
+    } else {
+      navigate(`/pokemon/${pokemon.id}`);
+    }
   };
 
   return (
