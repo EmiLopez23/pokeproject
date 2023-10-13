@@ -3,6 +3,7 @@ import './BasicInfo.styles.css';
 import SkeletonImg from 'components/skeleton_img/SkeletonImg';
 import SkeletonTitle from 'components/skeleton_title/SkeletonTitle';
 import SkeletonTag from 'components/skeleton_tag/SkeletonTag';
+import { SPRITE_URL } from 'utils/cons';
 
 interface BasicInfoProps {
   pokemon: Omit<Pokemon, 'stats'>;
@@ -28,15 +29,12 @@ const BasicInfo = ({ pokemon }: BasicInfoProps) => {
 
   return (
     <div className="basic-info">
-      <img
-        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-        alt={pokemon.name}
-      />
+      <img src={SPRITE_URL + `${pokemon.id}.png`} alt={pokemon.name} />
       <h1>{pokemon.name}</h1>
       <div className="types">
-        {pokemon.types.map((type, index) => (
-          <span key={index} className={`type-tag ${type}`}>
-            {type}
+        {pokemon.types.map((type) => (
+          <span key={type.id} className={`type-tag ${type.name}`}>
+            {type.name}
           </span>
         ))}
       </div>
