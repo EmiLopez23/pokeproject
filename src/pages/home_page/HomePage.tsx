@@ -5,6 +5,7 @@ import usePokemons from '../../hooks/usePokemons';
 import InfiniteScroll from 'react-infinite-scroller';
 import SkeletonCard from 'components/skeleton_card/SkeletonCard';
 import Loader from 'components/loader/Loader';
+import ScrollToTop from 'components/scroll_to_top/ScrollToTop';
 
 const HomePage = () => {
   const { pokemons, loadMore, loading, hasNext } = usePokemons();
@@ -39,6 +40,7 @@ const HomePage = () => {
           ))}
         </section>
       )}
+      <ScrollToTop />
     </main>
   );
 };
