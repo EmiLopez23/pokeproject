@@ -1,6 +1,6 @@
-import { ChangeEvent, SetStateAction, useEffect, useState } from 'react';
-import { getTypes } from 'utils/pokemonApi';
+import { ChangeEvent, SetStateAction } from 'react';
 import './Filters.css';
+import UseTypes from 'hooks/useTypes';
 
 interface Filter {
   name: string;
@@ -13,7 +13,7 @@ interface FiltersProps {
 }
 
 const Filters = ({ filters, setFilters }: FiltersProps) => {
-  const [types, setTypes] = useState(['']);
+  const { types } = UseTypes();
 
   const handleTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setFilters((prevState) => ({ ...prevState, type: event.target.value }));
@@ -23,12 +23,8 @@ const Filters = ({ filters, setFilters }: FiltersProps) => {
     setFilters((prevState) => ({ ...prevState, name: event.target.value }));
   };
 
-  useEffect(() => {
-    getTypes().then((types) => setTypes(types));
-  }, []);
-
   return (
-    <section className="filters">
+    <section className="filters" id="filters">
       <input
         value={filters.name}
         type="text"
@@ -37,9 +33,9 @@ const Filters = ({ filters, setFilters }: FiltersProps) => {
       />
       <select onChange={handleTypeChange}>
         <option value={''}>All</option>
-        {types.map((type, index) => (
-          <option value={type} key={index}>
-            {type}
+        {types.map((type) => (
+          <option value={type.name} key={type.id}>
+            {type.name}
           </option>
         ))}
       </select>
