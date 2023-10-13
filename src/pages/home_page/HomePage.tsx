@@ -7,12 +7,12 @@ import SkeletonCard from 'components/skeleton_card/SkeletonCard';
 import Loader from 'components/loader/Loader';
 
 const HomePage = () => {
-  const { pokemons, loadMore } = usePokemons();
+  const { pokemons, loadMore, loading, hasNext } = usePokemons();
   const [filters, setFilters] = useState({ name: '', type: '' });
   const filteredPokemons = pokemons.filter((pokemon) =>
     filters.type
       ? pokemon.name.toLowerCase().includes(filters.name.toLowerCase()) &&
-        pokemon.types.includes(filters.type)
+        pokemon.types.some((type) => type.name === filters.type)
       : pokemon.name.toLowerCase().includes(filters.name.toLowerCase())
   );
 
@@ -23,7 +23,7 @@ const HomePage = () => {
         <InfiniteScroll
           pageStart={0}
           loadMore={loadMore}
-          hasMore={pokemons.length <= 1280}
+          hasMore={hasNext}
           loader={
             <div style={{ width: '100%', textAlign: 'center', marginTop: 10 }}>
               <Loader size={50} color="black" />
