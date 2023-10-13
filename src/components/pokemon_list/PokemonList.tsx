@@ -1,9 +1,9 @@
-import { BasePokemon } from 'types';
+import { BasicPokemonInfo } from 'types';
 import PokemonCard from '../pokemon_card/PokemonCard';
 import './PokemonList.styles.css';
 
 interface PokemonListProps {
-  pokemons: (BasePokemon & { types: string[] })[];
+  pokemons: BasicPokemonInfo[];
 }
 
 const PokemonList = ({ pokemons }: PokemonListProps) => {

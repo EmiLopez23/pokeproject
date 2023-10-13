@@ -1,7 +1,7 @@
-//import axios from 'axios';
-import { BasePokemon, Pokemon } from 'types';
+import { BasicPokemonInfo, Pokemon, Type } from 'types';
 import client from './apolloClient';
 import { gql } from '@apollo/client';
+import { SPRITE_URL } from './cons';
 
 type PokemonFromAPI = {
   id: number;
@@ -10,9 +10,7 @@ type PokemonFromAPI = {
   height: number;
   weight: number;
   pokemon_v2_pokemontypes: {
-    pokemon_v2_type: {
-      name: string;
-    };
+    pokemon_v2_type: Type;
   }[];
   pokemon_v2_pokemonspecy: {
     pokemon_v2_evolutionchain: {
@@ -32,30 +30,54 @@ type PokemonFromAPI = {
 
 const getPokemons = async (
   limit = 10,
-  page = 0
-): Promise<(BasePokemon & { types: string[] })[]> => {
+  page = 0,
+  name = '',
+  type = ''
+): Promise<BasicPokemonInfo[]> => {
+  // agregar el filtrado por nombre y tipo a la query
   const {
     data: { pokemon_v2_pokemon },
   } = await client.query({
     query: gql`
-      query getPokemonList {
-        pokemon_v2_pokemon(limit: ${limit}, offset: ${page * limit}) {
+      query getPokemonList(
+        $limit: Int!
+        $offset: Int!
+        $name: String!
+        $type: String!
+      ) {
+        pokemon_v2_pokemon(
+          limit: $limit
+          offset: $offset
+          where: {
+            name: { _iregex: $name }
+            pokemon_v2_pokemontypes: {
+              pokemon_v2_type: { name: { _iregex: $type } }
+            }
+          }
+        ) {
           id
           name
           pokemon_v2_pokemontypes {
             pokemon_v2_type {
               name
+              id
             }
           }
         }
       }
     `,
+    variables: {
+      limit,
+      offset: page * limit,
+      name: name,
+      type: type,
+    },
   });
 
   return pokemon_v2_pokemon.map((pokemon: PokemonFromAPI) => {
-    const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+    const sprite = SPRITE_URL + `${pokemon.id}.png`;
     const types = pokemon.pokemon_v2_pokemontypes?.map(
-      (type) => type.pokemon_v2_type.name
+      (type) => type.pokemon_v2_type
     );
     return { id: pokemon.id, name: pokemon.name, sprite, types };
   });
@@ -90,6 +112,7 @@ const getPokemonById = async (pokemonId: number): Promise<Pokemon> => {
         pokemon_v2_pokemontypes {
           pokemon_v2_type {
             name
+            id
           }
         }
       }
@@ -121,7 +144,8 @@ const getPokemonById = async (pokemonId: number): Promise<Pokemon> => {
     value: stat.base_stat,
   }));
 
-  const types = pokemonTypes?.map((type) => type.pokemon_v2_type.name);
+  const types = pokemonTypes?.map((type) => type.pokemon_v2_type);
+
   return {
     id,
     name,
@@ -135,18 +159,22 @@ const getPokemonById = async (pokemonId: number): Promise<Pokemon> => {
   };
 };
 
-const getTypes = async (): Promise<string[]> => {
+const getTypes = async (): Promise<Type[]> => {
   const { data } = await client.query({
     query: gql`
       query getTypes {
         pokemon_v2_type(order_by: { name: asc }) {
           name
+          id
         }
       }
     `,
   });
 
-  return data.pokemon_v2_type.map((type: { name: string }) => type.name);
+  return data.pokemon_v2_type.map((type: Type) => ({
+    name: type.name,
+    id: type.id,
+  }));
 };
 
 export { getPokemons, getPokemonById, getTypes };
