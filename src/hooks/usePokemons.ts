@@ -19,14 +19,20 @@ const usePokemons = (filters: Filter) => {
       .finally(() => setLoading(false));
   }, [filters]);
 
-  const loadMore = (page: number) => {
+  const loadMore = async () => {
     setLoading(true);
-    getPokemons(POKEMON_QTY, page, filters.name, filters.type)
-      .then((data) => {
-        if (!data.length) setHasNext(false);
-        setPokemons((prevState) => [...prevState, ...data]);
-      })
-      .finally(() => setLoading(false));
+    try {
+      const newPokemons = await getPokemons(
+        POKEMON_QTY,
+        pokemons.length,
+        filters.name,
+        filters.type
+      );
+      if (!newPokemons.length) setHasNext(false);
+      setPokemons((prevState) => [...prevState, ...newPokemons]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return { pokemons, loadMore, loading, hasNext };

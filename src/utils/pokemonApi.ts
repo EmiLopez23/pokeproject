@@ -30,7 +30,7 @@ type PokemonFromAPI = {
 
 const getPokemons = async (
   limit = 10,
-  page = 0,
+  offset = 0,
   name = '',
   type = ''
 ): Promise<BasicPokemonInfo[]> => {
@@ -68,7 +68,7 @@ const getPokemons = async (
     `,
     variables: {
       limit,
-      offset: page * limit,
+      offset: offset,
       name: name,
       type: type,
     },
