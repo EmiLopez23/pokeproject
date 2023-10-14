@@ -1,0 +1,13 @@
+.skeleton-tag {
+  padding: 5px 0;
+  border-radius: 16px;
+  text-align: center;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.382),
+    transparent
+  );
+  animation: 3s linear 0.5s infinite normal none running loading;
+  background-size: 200% 100%;
+}

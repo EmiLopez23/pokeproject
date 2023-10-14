@@ -1,0 +1,50 @@
+.skeleton-card {
+  background-color: rgba(128, 128, 128, 0.4);
+  border-radius: 10px;
+  width: fit-content;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 3px 5px 65px 0px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  animation: 2s linear 0.5s infinite normal none running appear;
+}
+
+.skeleton-desc {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.skeleton-id {
+  height: 17px;
+}
+
+.skeleton-types {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
