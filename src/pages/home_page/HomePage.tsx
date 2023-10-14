@@ -6,16 +6,11 @@ import InfiniteScroll from 'react-infinite-scroller';
 import SkeletonCard from 'components/skeleton_card/SkeletonCard';
 import Loader from 'components/loader/Loader';
 import ScrollToTop from 'components/scroll_to_top/ScrollToTop';
+import { POKEMON_QTY } from 'utils/cons';
 
 const HomePage = () => {
-  const { pokemons, loadMore, loading, hasNext } = usePokemons();
   const [filters, setFilters] = useState({ name: '', type: '' });
-  const filteredPokemons = pokemons.filter((pokemon) =>
-    filters.type
-      ? pokemon.name.toLowerCase().includes(filters.name.toLowerCase()) &&
-        pokemon.types.some((type) => type.name === filters.type)
-      : pokemon.name.toLowerCase().includes(filters.name.toLowerCase())
-  );
+  const { pokemons, loadMore, hasNext, loading } = usePokemons(filters);
 
   return (
     <main>
@@ -26,18 +21,25 @@ const HomePage = () => {
           loadMore={loadMore}
           hasMore={hasNext}
           loader={
-            <div style={{ width: '100%', textAlign: 'center', marginTop: 10 }}>
+            <div
+              style={{ width: '100%', textAlign: 'center', marginTop: 10 }}
+              key="infinite-scroll-loader"
+            >
               <Loader size={50} color="black" />
             </div>
           }
         >
-          <PokemonList pokemons={filteredPokemons} />
+          <PokemonList pokemons={pokemons} />
         </InfiniteScroll>
       ) : (
         <section className="pokemon-list">
-          {new Array(10).fill(1).map((_, i) => (
-            <SkeletonCard key={i} />
-          ))}
+          {loading ? (
+            new Array(POKEMON_QTY)
+              .fill(1)
+              .map((_, i) => <SkeletonCard key={i} />)
+          ) : (
+            <p>No Pokemons found</p>
+          )}
         </section>
       )}
       <ScrollToTop />

@@ -1,11 +1,7 @@
 import { ChangeEvent, SetStateAction } from 'react';
 import './Filters.css';
 import UseTypes from 'hooks/useTypes';
-
-interface Filter {
-  name: string;
-  type: string;
-}
+import { Filter } from 'types';
 
 interface FiltersProps {
   filters: Filter;
@@ -29,9 +25,10 @@ const Filters = ({ filters, setFilters }: FiltersProps) => {
         value={filters.name}
         type="text"
         placeholder="Charizard"
+        name="name"
         onChange={handleNameChange}
       />
-      <select onChange={handleTypeChange}>
+      <select onChange={handleTypeChange} name="type">
         <option value={''}>All</option>
         {types.map((type) => (
           <option value={type.name} key={type.id}>

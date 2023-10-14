@@ -26,3 +26,8 @@ export interface Type {
   name: string;
   id: number;
 }
+
+export interface Filter {
+  name: string;
+  type: string;
+}
